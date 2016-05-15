@@ -1,6 +1,6 @@
 /* hamburger button */
 .hamburger {
-  padding: 15px 15px;
+  padding: 0;
   display: inline-block;
   cursor: pointer;
   transition-property: opacity, -webkit-filter;
@@ -9,6 +9,7 @@
   transition-duration: 0.15s;
   transition-timing-function: linear;
   font: inherit;
+  font-size: 0;
   color: inherit;
   text-transform: none;
   background-color: transparent;
