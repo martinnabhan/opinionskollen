@@ -11,13 +11,27 @@
 </head>
 
 <body>
+<div class="content-end">
+  <button id="hamburger" class="hamburger hamburger--elastic" type="button">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+</div>
+
+<script>
+document.getElementById("hamburger").addEventListener("click", function() {
+  this.classList.toggle("is-active");
+  }, false);
+</script>
+
 <div class="container">
   <div class="section">
     <h1 class="text-big">Website title</h1>
     <div class="row">
       <div class="col-xs-12 col-md-6">
         <h1 class="text-medium text-gray">This is a big text in Sierra</h1>
-        <p id="overview"></p>
+        <div id="overview"></div>
       </div>
       <div class="col-xs-12 col-md-6">
         <h1 class="text-medium text-gray">This is a big text in Sierra</h1>
@@ -62,7 +76,7 @@ var Overview = {
   },
 
   view(ctrl) {
-    return <h1>Hello {ctrl.who()}!</h1>
+    return <p>Hello {ctrl.who()}! This is a test for returning DOM components using JSX for Mithril.</p>
   }
 }
 
