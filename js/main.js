@@ -5,6 +5,11 @@ function toggleScroll() {
       e.preventDefault();
     }
   });
+  $('body').on('touchmove', function(e) {
+    if ($('body').hasClass('noscroll')) {
+      e.preventDefault();
+    }
+  });
 }
 
 /* hamburger menu animation */
