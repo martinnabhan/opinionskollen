@@ -1,0 +1,35 @@
+{
+  "query": [
+    {
+      "code": "Parti",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "c",
+          "l",
+          "m",
+          "kd",
+          "nyd",
+          "s",
+          "v",
+          "mp",
+          "SD",
+          "c+fp+m+kd",
+          "s+v+mp"
+        ]
+      }
+    },
+    {
+      "code": "ContentsCode",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "ME0201B1"
+        ]
+      }
+    }
+  ],
+  "response": {
+    "format": "json"
+  }
+}
