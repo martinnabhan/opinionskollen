@@ -32,22 +32,56 @@
   </div>
 </div>
 
-<div id="main" class="container"></div>
+<div id="main"></div>
 
 <script type="text/msx;harmony=true">
 /* components */
 var Overview = {
-  data: m.request({method: "GET", url: "json/data.json"}),
-  controller() {
+  data: m.prop(),
 
+  init() {
+    m.request({method: "GET", url: "json/data.json"}).then(this.data);
+  },
+  controller() {
+    Overview.init();
+
+    this.list = function() {
+      var values = [];
+
+      for (var i = 85; i < Overview.data().data.length; i = i + 86) {
+        values.push(Overview.data().data[i]);
+      };
+
+      return values;
+    };
   },
   view(ctrl) {
-    return <div>
-      <p>{this.data().data[0].key[0]} and {this.data().data[0].key[1]}</p>
-      <p>{this.data().data[0].values}</p>
-      <p>{this.data().data[1].key}</p>
-      <p>{this.data().data[1].values}</p>
+    return <div class="container aligner-center-horitzontal graph">
+      <div class="party v">
+        <p>{ctrl.list()[6].key[0]} and {ctrl.list()[6].values}</p>
       </div>
+      <div class="party s">
+        <p>{ctrl.list()[5].key[0]} and {ctrl.list()[5].values}</p>
+      </div>
+      <div class="party mp">
+        <p>{ctrl.list()[7].key[0]} and {ctrl.list()[7].values}</p>
+      </div>
+      <div class="party c">
+        <p>{ctrl.list()[0].key[0]} and {ctrl.list()[0].values}</p>
+      </div>
+      <div class="party fp">
+        <p>{ctrl.list()[1].key[0]} and {ctrl.list()[1].values}</p>
+      </div>
+      <div class="party m">
+        <p>{ctrl.list()[2].key[0]} and {ctrl.list()[2].values}</p>
+      </div>
+      <div class="party kd">
+        <p>{ctrl.list()[3].key[0]} and {ctrl.list()[3].values}</p>
+      </div>
+      <div class="party sd">
+        <p>{ctrl.list()[4].key[0]} and {ctrl.list()[4].values}</p>
+      </div>
+    </div>
   }
 }
 

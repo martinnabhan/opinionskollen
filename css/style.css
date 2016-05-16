@@ -110,3 +110,47 @@
 .nav li:first-child {
   margin-top: 60px;
 }
+
+/* graph & political parties */
+.graph {
+  line-height: calc(100vh - 178px);
+  display: block;
+}
+
+.party {
+  width: 10%;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: bottom;
+}
+.v {
+  background-color: darkred;
+}
+
+.s {
+  background-color: red;
+}
+
+.mp {
+  background-color: lightgreen;
+}
+
+.c {
+  background-color: green;
+}
+
+.fp {
+  background-color: blue;
+}
+
+.m {
+  background-color: lightblue;
+}
+
+.kd {
+  background-color: darkblue;
+}
+
+.sd {
+  background-color: yellow;
+}
