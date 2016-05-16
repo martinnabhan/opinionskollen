@@ -15,10 +15,10 @@
 <body>
 
 <div class="nav">
-  <li><a href="/">Översikt</a></li>
-  <li><a href="/partier">Enskilda partier</a></li>
-  <li><a href="/forandring">Översikt förändring</a></li>
-  <li><a href="/partierforandring">Enskilda partier förändring</a></li>
+  <li><a href="#/">Översikt</a></li>
+  <li><a href="#/partier">Enskilda partier</a></li>
+  <li><a href="#/forandring">Översikt förändring</a></li>
+  <li><a href="#/partierforandring">Enskilda partier förändring</a></li>
 </div>
 
 <div class="container">
@@ -32,61 +32,30 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="section">
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <h1 class="text-medium text-gray">This is a big text in Sierra</h1>
-        <div id="overview"></div>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <h1 class="text-medium text-gray">This is a big text in Sierra</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="section background-dark">
-  <div class="container text-center">
-    <h1 class="text-huge text-with-subtitle">This is a full width banner</h1>
-    <h1 class="text-big text-gray">It looks very nice thanks to Sierra</h1>
-  </div>
-</div>
-
-<div class="container">
-  <div class="section">
-    <div class="row">
-      <div class="col-md-4">
-        <h1 class="text-medium text-gray">First column</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-      <div class="col-md-4">
-        <h1 class="text-medium text-gray">Second column</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-      <div class="col-md-4">
-        <h1 class="text-medium text-gray">Third column</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="main" class="container"></div>
 
 <script type="text/msx;harmony=true">
+/* components */
 var Overview = {
+  data: m.request({method: "GET", url: "json/data.json"}),
   controller() {
-    this.who = m.prop('Mithril')
-  },
 
+  },
   view(ctrl) {
-    return <p>Hello {ctrl.who()}! This is a test for returning DOM components using JSX for Mithril.</p>
+    return <div>
+      <p>{this.data().data[0].key[0]} and {this.data().data[0].key[1]}</p>
+      <p>{this.data().data[0].values}</p>
+      <p>{this.data().data[1].key}</p>
+      <p>{this.data().data[1].values}</p>
+      </div>
   }
 }
 
-m.module(document.getElementById('overview'), Overview)
+m.route(document.getElementById("main"), "/", {
+    "/": Overview,
+});
+
+m.route.mode = "hash";
 </script>
 
 <footer class="background-dark">

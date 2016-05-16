@@ -5,6 +5,13 @@ function toggleScroll() {
       e.preventDefault();
     }
   });
+  /* for firefox */
+  $('body').on('DOMMouseScroll', function(e) {
+    if ($('body').hasClass('noscroll')) {
+      e.preventDefault();
+    }
+  });
+  /* for touch devices */
   $('body').on('touchmove', function(e) {
     if ($('body').hasClass('noscroll')) {
       e.preventDefault();
