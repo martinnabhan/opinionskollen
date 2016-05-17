@@ -114,13 +114,14 @@
 /* graph & political parties */
 .graph {
   line-height: calc(100vh - 178px);
+  height: calc(100vh - 178px);
   display: block;
 }
 
 .party {
   width: 10%;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 2.85%;
   vertical-align: bottom;
 }
 .v {
@@ -153,4 +154,5 @@
 
 .sd {
   background-color: yellow;
+  margin-right: 0;
 }

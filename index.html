@@ -54,31 +54,41 @@ var Overview = {
 
       return values;
     };
+
+    this.heights = function() {
+      var heights = [];
+
+      for (var i = 85; i < Overview.data().data.length; i = i + 86) {
+        heights.push("height: " + Overview.data().data[i].values * 3 + "%");
+      };
+
+      return heights;
+    };
   },
   view(ctrl) {
-    return <div class="container aligner-center-horitzontal graph">
-      <div class="party v">
+    return <div class="container aligner-center-horizontal graph">
+      <div class="party v" style={ctrl.heights()[6]}>
         <p>{ctrl.list()[6].key[0]} and {ctrl.list()[6].values}</p>
       </div>
-      <div class="party s">
+      <div class="party s" style={ctrl.heights()[5]}>
         <p>{ctrl.list()[5].key[0]} and {ctrl.list()[5].values}</p>
       </div>
-      <div class="party mp">
+      <div class="party mp" style={ctrl.heights()[7]}>
         <p>{ctrl.list()[7].key[0]} and {ctrl.list()[7].values}</p>
       </div>
-      <div class="party c">
+      <div class="party c" style={ctrl.heights()[0]}>
         <p>{ctrl.list()[0].key[0]} and {ctrl.list()[0].values}</p>
       </div>
-      <div class="party fp">
+      <div class="party fp" style={ctrl.heights()[1]}>
         <p>{ctrl.list()[1].key[0]} and {ctrl.list()[1].values}</p>
       </div>
-      <div class="party m">
+      <div class="party m" style={ctrl.heights()[2]}>
         <p>{ctrl.list()[2].key[0]} and {ctrl.list()[2].values}</p>
       </div>
-      <div class="party kd">
+      <div class="party kd" style={ctrl.heights()[3]}>
         <p>{ctrl.list()[3].key[0]} and {ctrl.list()[3].values}</p>
       </div>
-      <div class="party sd">
+      <div class="party sd" style={ctrl.heights()[4]}>
         <p>{ctrl.list()[4].key[0]} and {ctrl.list()[4].values}</p>
       </div>
     </div>
