@@ -111,10 +111,25 @@
   margin-top: 60px;
 }
 
+/* graph menu */
+.previous {
+  display: inline-block;
+}
+
+.period {
+  display: inline-block;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.next {
+  display: inline-block;
+}
+
 /* graph & political parties */
 .graph {
-  line-height: calc(100vh - 178px);
-  height: calc(100vh - 178px);
+  line-height: calc(100vh - 178px - 96px);
+  height: calc(100vh - 178px - 96px);
   display: block;
 }
 
@@ -126,33 +141,41 @@
 }
 .v {
   background-color: darkred;
+  height: 0;
 }
 
 .s {
   background-color: red;
+  height: 0;
 }
 
 .mp {
   background-color: lightgreen;
+  height: 0;
 }
 
 .c {
   background-color: green;
+  height: 0;
 }
 
 .fp {
   background-color: blue;
+  height: 0;
 }
 
 .m {
   background-color: lightblue;
+  height: 0;
 }
 
 .kd {
   background-color: darkblue;
+  height: 0;
 }
 
 .sd {
   background-color: yellow;
   margin-right: 0;
+  height: 0;
 }
