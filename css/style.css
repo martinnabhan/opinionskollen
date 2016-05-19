@@ -128,16 +128,15 @@
 
 /* graph & political parties */
 .graph {
-  line-height: calc(100vh - 178px - 96px);
   height: calc(100vh - 178px - 96px);
-  display: block;
+  display: flex;
+  align-items: flex-end;
 }
 
 .party {
   width: 10%;
   display: inline-block;
   margin-right: 2.85%;
-  vertical-align: bottom;
 }
 .v {
   background-color: darkred;
