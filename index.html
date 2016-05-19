@@ -101,29 +101,29 @@ var Overview = {
   },
   view(ctrl) {
     this.animate = function() {
-      $(".v").animate({"height": ctrl.list()[1][5]});
-      $(".s").animate({"height": ctrl.list()[1][4]});
+      $("#v").animate({"height": ctrl.list()[1][5]});
+      $("#s").animate({"height": ctrl.list()[1][4]});
 
       if (ctrl.list()[1][6] == "NaN%") {
-        $(".mp").animate({"height": "1px"});
+        $("#mp").animate({"height": "1px"});
       } else {
-        $(".mp").animate({"height": ctrl.list()[1][6]});
+        $("#mp").animate({"height": ctrl.list()[1][6]});
       };
 
-      $(".c").animate({"height": ctrl.list()[1][0]});
-      $(".l").animate({"height": ctrl.list()[1][1]});
-      $(".m").animate({"height": ctrl.list()[1][2]});
+      $("#c").animate({"height": ctrl.list()[1][0]});
+      $("#l").animate({"height": ctrl.list()[1][1]});
+      $("#m").animate({"height": ctrl.list()[1][2]});
 
       if (ctrl.list()[1][3] == "NaN%") {
-        $(".kd").animate({"height": "1px"});
+        $("#kd").animate({"height": "1px"});
       } else {
-        $(".kd").animate({"height": ctrl.list()[1][3]});
+        $("#kd").animate({"height": ctrl.list()[1][3]});
       };
 
       if (ctrl.list()[1][7] == "NaN%") {
-        $(".sd").animate({"height": "1px"});
+        $("#sd").animate({"height": "1px"});
       } else {
-        $(".sd").animate({"height": ctrl.list()[1][7]});
+        $("#sd").animate({"height": ctrl.list()[1][7]});
       };
     };
 
@@ -134,29 +134,37 @@ var Overview = {
       <h1 class="text-medium text-gray next" onclick={ctrl.next}>Efter</h1>
       </div>
       <div class="container graph">
-        <div class="party v">
-          <p>{ctrl.list()[0][5].key[0]}, {ctrl.list()[0][5].key[1]}, {ctrl.list()[0][5].values}</p>
+        <div id="v" class="party">
+          <p class="text-center">{ctrl.list()[0][5].values}%</p>
+          <div class="v"></div>
         </div>
-        <div class="party s">
-          <p>{ctrl.list()[0][4].key[0]}, {ctrl.list()[0][4].key[1]}, {ctrl.list()[0][4].values}</p>
+        <div id="s" class="party">
+          <p class="text-center">{ctrl.list()[0][4].values}%</p>
+          <div class="s"></div>
         </div>        
-        <div class="party mp">
-          <p>{ctrl.list()[0][6].key[0]}, {ctrl.list()[0][6].key[1]}, {ctrl.list()[0][6].values}</p>
+        <div id="mp" class="party">
+          <p class="text-center">{ctrl.list()[0][6].values}%</p>
+          <div class="mp"></div>
         </div>
-        <div class="party c">
-          <p>{ctrl.list()[0][0].key[0]}, {ctrl.list()[0][0].key[1]}, {ctrl.list()[0][0].values}</p>
+        <div id="c" class="party">
+          <p class="text-center">{ctrl.list()[0][0].values}%</p>
+          <div class="c"></div>
         </div>
-        <div class="party l">
-          <p>{ctrl.list()[0][1].key[0]}, {ctrl.list()[0][1].key[1]}, {ctrl.list()[0][1].values}</p>
+        <div id="l" class="party">
+          <p class="text-center">{ctrl.list()[0][1].values}%</p>
+          <div class="l"></div>
         </div>
-        <div class="party m">
-          <p>{ctrl.list()[0][2].key[0]}, {ctrl.list()[0][2].key[1]}, {ctrl.list()[0][2].values}</p>
+        <div id="m" class="party">
+          <p class="text-center">{ctrl.list()[0][2].values}%</p>
+          <div class="m"></div>
         </div>
-        <div class="party kd">
-          <p>{ctrl.list()[0][3].key[0]}, {ctrl.list()[0][3].key[1]}, {ctrl.list()[0][3].values}</p>
+        <div id="kd" class="party">
+          <p class="text-center">{ctrl.list()[0][3].values}%</p>
+          <div class="kd"></div>
         </div>
-        <div class="party sd">
-          <p>{ctrl.list()[0][7].key[0]}, {ctrl.list()[0][7].key[1]}, {ctrl.list()[0][7].values}</p>
+        <div id="sd" class="party no-margin-right">
+          <p class="text-center">{ctrl.list()[0][7].values}%</p>
+          <div class="sd"></div>
         </div>
       </div>
     </div>

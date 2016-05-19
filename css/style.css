@@ -134,47 +134,56 @@
 }
 
 .party {
+  position: relative;
   width: 10%;
   display: inline-block;
   margin-right: 2.85%;
+  padding-bottom: 22px;
 }
+.party p {
+  margin: 0;
+}
+
 .v {
-  background-color: darkred;
-  height: 0;
+  background-color: #aa2f2f;
+  height: 100%;
 }
 
 .s {
-  background-color: red;
-  height: 0;
+  background-color: #e82f3b;
+  height: 100%;
 }
 
 .mp {
-  background-color: lightgreen;
-  height: 0;
+  background-color: #9fc85d;
+  height: 100%;
 }
 
 .c {
-  background-color: green;
-  height: 0;
+  background-color: #209d5d;
+  height: 100%;
 }
 
 .l {
-  background-color: blue;
-  height: 0;
+  background-color: #6acae8;
+  height: 100%;
 }
 
 .m {
-  background-color: lightblue;
-  height: 0;
+  background-color: #197abb;
+  height: 100%;
 }
 
 .kd {
-  background-color: darkblue;
-  height: 0;
+  background-color: #01469a;
+  height: 100%;
 }
 
 .sd {
-  background-color: yellow;
+  background-color: #e8c420;
+  height: 100%;
+}
+
+.no-margin-right {
   margin-right: 0;
-  height: 0;
 }
