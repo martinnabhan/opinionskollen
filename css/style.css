@@ -128,7 +128,7 @@
 
 /* graph & political parties */
 .graph {
-  height: calc(100vh - 178px - 96px);
+  height: 100vh;
   display: flex;
   align-items: flex-end;
 }
@@ -183,7 +183,17 @@
   background-color: #e8c420;
   height: 100%;
 }
+.logos {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.logos img {
+  width: 10%;
+  margin-right: 2.85%;
+  vertical-align: middle;
+}
 
 .no-margin-right {
-  margin-right: 0;
+  margin-right: 0 !important;
 }

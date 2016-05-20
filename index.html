@@ -19,7 +19,7 @@
   <li><a href="#/partierforandring">Enskilda partier förändring</a></li>
 </div>
 
-<div class="container">
+<div class="container navbar">
   <div class="aligner-space-between">
     <h1 class="text-big">Opinionskollen</h1>
     <button id="hamburger" class="hamburger hamburger--elastic" type="button">
@@ -101,6 +101,21 @@ var Overview = {
   },
   view(ctrl) {
     this.animate = function() {
+      function graphSize() {
+      var navHeight = $(".navbar").height(),
+          graphMenuHeight = $(".graph-menu").height(),
+          logosHeight = $(".logos").height() + 20,
+          totalHeight = navHeight + graphMenuHeight + logosHeight;
+
+        $(".graph").css('height', '100vh').css('height', '-=' + totalHeight + 'px');
+      }
+      graphSize();
+
+      /* resize on window resize */
+      $(window).resize(function() {
+        graphSize();
+      });
+
       $("#v").animate({"height": ctrl.list()[1][5]});
       $("#s").animate({"height": ctrl.list()[1][4]});
 
@@ -166,6 +181,16 @@ var Overview = {
           <p class="text-center">{ctrl.list()[0][7].values}%</p>
           <div class="sd"></div>
         </div>
+      </div>
+      <div class="container background-dark logos">
+        <img src="img/logo-v.png" alt="Vänsterpartiet" class="v-img" />
+        <img src="img/logo-s.svg" alt="Socialdemokraterna" class="s-img" />
+        <img src="img/logo-mp.svg" alt="Miljöpartiet" class="mp-img" />
+        <img src="img/logo-c.svg" alt="Centerpartiet" class="c-img" />
+        <img src="img/logo-l.png" alt="Liberalerna" class="l-img" />
+        <img src="img/logo-m.png" alt="Moderaterna" class="m-img" />
+        <img src="img/logo-kd.svg" alt="Kristdemokraterna" class="kd-img" />
+        <img src="img/logo-sd.png" alt="Sverigedemokraterna" class="sd-img no-margin-right" />
       </div>
     </div>
   }
