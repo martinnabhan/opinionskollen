@@ -111,7 +111,19 @@
   margin-top: 60px;
 }
 
+/* overview module view */
+.overview {
+  display: flex;
+  flex-flow: column;
+}
+
 /* graph menu */
+.graph-menu {
+  display: flex;
+  flex: 0 1 auto;
+  width: 100%;
+}
+
 .previous {
   display: inline-block;
 }
@@ -126,11 +138,12 @@
   display: inline-block;
 }
 
-/* graph & political parties */
+/* graph, political parties & logos */
 .graph {
-  height: 100vh;
   display: flex;
+  flex: 1 1 auto;
   align-items: flex-end;
+  width: 100%;
 }
 
 .party {
@@ -183,6 +196,7 @@
   background-color: #e8c420;
   height: 100%;
 }
+
 .logos {
   padding-top: 10px;
   padding-bottom: 10px;

@@ -100,16 +100,22 @@ var Overview = {
     };
   },
   view(ctrl) {
-    this.animate = function() {
+    this.animate = function(element, init) {
       function graphSize() {
-      var navHeight = $(".navbar").height(),
-          graphMenuHeight = $(".graph-menu").height(),
-          logosHeight = $(".logos").height() + 20,
-          totalHeight = navHeight + graphMenuHeight + logosHeight;
+        var navHeight = $(".navbar").height();
+        var windowHeight = $(window).height();
 
-        $(".graph").css('height', '100vh').css('height', '-=' + totalHeight + 'px');
+        $(".overview").css("height", windowHeight).css("height", "-=" + navHeight + "px");
+
+        setTimeout(function() {
+          $(".graph").css("height", "initial");
+          $(".graph").css("height", $(".graph").height() + "px");
+        }, 1);
       }
-      graphSize();
+
+      if (!init) {
+        graphSize();
+      }
 
       /* resize on window resize */
       $(window).resize(function() {
