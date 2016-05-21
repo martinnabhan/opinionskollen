@@ -117,10 +117,21 @@ var Overview = {
         graphSize();
       }
 
-      /* resize on window resize */
-      $(window).resize(function() {
-        graphSize();
-      });
+      if (/Android/i.test(navigator.userAgent)) {
+        var androidWidth = $(window).width();
+
+        $(window).resize(function() {
+          if (androidWidth != $(window).width()) {
+            graphSize();
+            androidWidth = $(window).width();
+          }
+        });
+      } else {
+        /* resize graph on window resize */
+        $(window).resize(function() {
+          graphSize();
+        });
+      }
 
       $("#v").animate({"height": ctrl.list()[1][5]});
       $("#s").animate({"height": ctrl.list()[1][4]});
