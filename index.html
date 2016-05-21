@@ -12,6 +12,7 @@
 <script src="js/main.js"></script>
 </head>
 <body>
+
 <div class="nav">
   <li><a href="#/">Översikt</a></li>
   <li><a href="#/partier">Enskilda partier</a></li>
@@ -40,6 +41,7 @@ var Overview = {
   selectedValue: 0,
   mostRecentValue: 0,
 
+  /* request json data and select latest data period */
   init() {
     m.request({method: "GET", url: "json/data.json"}).then(this.data).then(function() {
       Overview.selected = Overview.data().data[Overview.data().data.length - 1].key[1];
@@ -50,6 +52,7 @@ var Overview = {
   controller() {
     Overview.init();
 
+    /* save selected period as string, values and heights for selected period in arrays */
     this.list = function() {
       var values = [],
           heights = [],
@@ -81,18 +84,20 @@ var Overview = {
       return [values, heights, selected];
     };
 
+    /* select previous period */
     this.previous = function() {
       if (Overview.selectedValue == 0) {
-        /* tell user is on first period */
+        /* user is on first period */
       } else {
         Overview.selectedValue--;
         Overview.selected = Overview.data().data[Overview.selectedValue].key[1];
       };
     };
 
+    /* select next period */
     this.next = function() {
       if (Overview.selectedValue == Overview.mostRecentValue) {
-        /* tell user is on last period */
+        /* user is on last period */
       } else {
         Overview.selectedValue++;
         Overview.selected = Overview.data().data[Overview.selectedValue].key[1];
@@ -100,7 +105,9 @@ var Overview = {
     };
   },
   view(ctrl) {
+    /* animate graphs when view is finished loading */
     this.animate = function(element, init) {
+      /* resize graph */
       function graphSize() {
         var navHeight = $(".navbar").height();
         var windowHeight = $(window).height();
@@ -117,6 +124,7 @@ var Overview = {
         graphSize();
       }
 
+      /* viewheight is broken on Android so disable it and only resize on orientation change */
       if (/Android/i.test(navigator.userAgent)) {
         var androidWidth = $(window).width();
 
