@@ -66,10 +66,10 @@ var Overview = {
         if (Overview.data().data[i].key[1] == Overview.selected) {
           if (Overview.data().data[i].values == "..") {
             values.push("0.0");
-            heights.push(0 + "%");
+            heights.push(0.0);
           } else {
             values.push(Overview.data().data[i].values);
-            heights.push(Overview.data().data[i].values * 2 + "%");
+            heights.push(Overview.data().data[i].values);
           }
         }
       };
@@ -110,7 +110,7 @@ var Overview = {
     };
   },
   view(ctrl) {
-    /* animate graphs when view is finished loading */
+    /* resize graph and animate bars when view is finished loading */
     this.animate = function(element, init) {
       /* resize graph */
       function graphSize() {
@@ -125,11 +125,12 @@ var Overview = {
         }, 100);
       }
 
+      /* resize graph once on first load */
       if (!init) {
         graphSize();
       }
 
-      /* viewheight is broken on Chrome for android so disable it and only resize on orientation change */
+      /* viewheight is broken on Chrome for android so only resize on orientation change */
       if (/Android/i.test(navigator.userAgent)) {
         var androidWidth = $(window).width();
 
@@ -140,35 +141,47 @@ var Overview = {
           }
         });
       } else {
-        /* resize graph on window resize */
+        /* if not android resize graph on window resize */
         $(window).resize(function() {
           graphSize();
         });
       }
 
-      $("#v").animate({"height": ctrl.list()[1][5]});
-      $("#s").animate({"height": ctrl.list()[1][4]});
+      /* calculate bar heights */
+      var maxHeight = Math.max.apply(Math, ctrl.list()[1]),
+          vHeight = ((ctrl.list()[1][5] / maxHeight) * 100) + "%",
+          sHeight = ((ctrl.list()[1][4] / maxHeight) * 100) + "%",
+          mpHeight = ((ctrl.list()[1][6] / maxHeight) * 100) + "%",
+          cHeight = ((ctrl.list()[1][0] / maxHeight) * 100) + "%",
+          lHeight = ((ctrl.list()[1][1] / maxHeight) * 100) + "%",
+          mHeight = ((ctrl.list()[1][2] / maxHeight) * 100) + "%",
+          kdHeight = ((ctrl.list()[1][3] / maxHeight) * 100) + "%",
+          sdHeight = ((ctrl.list()[1][7] / maxHeight) * 100) + "%";
 
-      if (ctrl.list()[1][6] == "0%") {
-        $("#mp").animate({"height": "1px"});
+      /* animate bar heights */
+      $("#v").animate({"height": vHeight});
+      $("#s").animate({"height": sHeight});
+
+      if (mpHeight == "0%") {
+        $("#mp").animate({"height": "23px"});
       } else {
-        $("#mp").animate({"height": ctrl.list()[1][6]});
+        $("#mp").animate({"height": mpHeight});
       };
 
-      $("#c").animate({"height": ctrl.list()[1][0]});
-      $("#l").animate({"height": ctrl.list()[1][1]});
-      $("#m").animate({"height": ctrl.list()[1][2]});
+      $("#c").animate({"height": cHeight});
+      $("#l").animate({"height": lHeight});
+      $("#m").animate({"height": mHeight});
 
-      if (ctrl.list()[1][3] == "0%") {
-        $("#kd").animate({"height": "1px"});
+      if (kdHeight == "0%") {
+        $("#kd").animate({"height": "23px"});
       } else {
-        $("#kd").animate({"height": ctrl.list()[1][3]});
+        $("#kd").animate({"height": kdHeight});
       };
 
-      if (ctrl.list()[1][7] == "0%") {
-        $("#sd").animate({"height": "1px"});
+      if (sdHeight == "0%") {
+        $("#sd").animate({"height": "23px"});
       } else {
-        $("#sd").animate({"height": ctrl.list()[1][7]});
+        $("#sd").animate({"height": sdHeight});
       };
     };
 
@@ -179,35 +192,35 @@ var Overview = {
       <h1 class="text-medium text-gray next" onclick={ctrl.next}>Efter</h1>
       </div>
       <div class="container graph">
-        <div id="v" class="party">
+        <div id="v" class="parties">
           <p class="text-center">{ctrl.list()[0][5]}%</p>
           <div class="v"></div>
         </div>
-        <div id="s" class="party">
+        <div id="s" class="parties">
           <p class="text-center">{ctrl.list()[0][4]}%</p>
           <div class="s"></div>
         </div>        
-        <div id="mp" class="party">
+        <div id="mp" class="parties">
           <p class="text-center">{ctrl.list()[0][6]}%</p>
           <div class="mp"></div>
         </div>
-        <div id="c" class="party">
+        <div id="c" class="parties">
           <p class="text-center">{ctrl.list()[0][0]}%</p>
           <div class="c"></div>
         </div>
-        <div id="l" class="party">
+        <div id="l" class="parties">
           <p class="text-center">{ctrl.list()[0][1]}%</p>
           <div class="l"></div>
         </div>
-        <div id="m" class="party">
+        <div id="m" class="parties">
           <p class="text-center">{ctrl.list()[0][2]}%</p>
           <div class="m"></div>
         </div>
-        <div id="kd" class="party">
+        <div id="kd" class="parties">
           <p class="text-center">{ctrl.list()[0][3]}%</p>
           <div class="kd"></div>
         </div>
-        <div id="sd" class="party no-margin-right">
+        <div id="sd" class="parties no-margin-right">
           <p class="text-center">{ctrl.list()[0][7]}%</p>
           <div class="sd"></div>
         </div>
@@ -226,8 +239,98 @@ var Overview = {
   }
 }
 
+var Party = {
+  data: m.prop(),
+  selected: m.prop(),
+  selectedValue: 0,
+  mostRecentValue: 0,
+
+  /* request json data and select latest data period */
+  init() {
+    m.request({method: "GET", url: "json/data.json"}).then(this.data).then(function() {
+      Overview.selected = Overview.data().data[Overview.data().data.length - 1].key[1];
+      Overview.selectedValue = Overview.data().data.length - 1;
+      Overview.mostRecentValue = Overview.data().data.length - 1;
+    });
+  },
+  controller() {
+    Overview.init();
+
+    /* save all periods as string, save values and widths for selected party in arrays */
+    this.list = function() {
+      var values = [],
+          heights = [],
+          year = "",
+          period = "",
+          selected = "",
+          months = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti",
+                    "September", "Oktober", "November", "December"];
+
+      for (var i = 0; i < Overview.data().data.length; i++) {
+        if (Overview.data().data[i].key[1] == Overview.selected) {
+          if (Overview.data().data[i].values == "..") {
+            values.push("0.0");
+            heights.push(0.0);
+          } else {
+            values.push(Overview.data().data[i].values);
+            heights.push(Overview.data().data[i].values);
+          }
+        }
+      };
+
+      year = Overview.selected.substring(0,4);
+      period = Overview.selected.substring(5, 7);
+
+      if (period >= 10) {
+        period = months[period - 1];
+      } else {
+        period = Overview.selected.substring(6, 7);
+        period = months[period - 1];
+      };
+
+      selected = period + " " + year;
+
+      return [values, heights, selected];
+    };
+
+    /* select previous party */
+    this.previous = function() {
+
+    };
+
+    /* select next party */
+    this.next = function() {
+
+    };
+  },
+  view(ctrl) {
+    /* animate bars when view is finished loading */
+    this.animate = function(element, init) {
+      /* resize graph */
+
+      /* resize graph on first load */
+
+      /* resize on orientation change */
+
+      /* calculate bar widths */
+
+      /* animate bars */
+    };
+
+    return <div class="party" config={this.animate}>
+      <div class="container graph-menu">
+      <h1 class="text-medium text-gray previous" onclick={ctrl.previous}>Framåt</h1>
+      <h1 class="text-medium text-gray party-name">{ctrl.list()[2]}</h1>
+      <h1 class="text-medium text-gray next" onclick={ctrl.next}>Bakåt</h1>
+      </div>
+      <div class="container party-graph">
+      </div>
+    </div>
+  }
+}
 m.route(document.getElementById("main"), "/", {
     "/": Overview,
+    "/partier": Party,
 });
 m.route.mode = "hash";
 

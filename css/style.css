@@ -146,14 +146,14 @@
   width: 100%;
 }
 
-.party {
+.parties {
   position: relative;
   width: 10%;
   display: inline-block;
   margin-right: 2.85%;
   padding-bottom: 22px;
 }
-.party p {
+.parties p {
   margin: 0;
 }
 
