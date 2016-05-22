@@ -30,6 +30,7 @@ function toggleNav() {
 $(document).ready(function() {
   /* hamburger menu trigger */
   $(".hamburger").click(toggleNav);
+  $(".navlink").click(toggleNav);
 });
 
 /* make esc exit hamburger menu */
