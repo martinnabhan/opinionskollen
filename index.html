@@ -242,55 +242,51 @@ var Overview = {
 var Party = {
   data: m.prop(),
   selected: m.prop(),
-  selectedValue: 0,
-  mostRecentValue: 0,
+  parties: ["v", "s", "mp", "c", "l", "m", "kd", "sd"],
 
-  /* request json data and select latest data period */
+  /* request json data and select default party */
   init() {
     m.request({method: "GET", url: "json/data.json"}).then(this.data).then(function() {
-      Overview.selected = Overview.data().data[Overview.data().data.length - 1].key[1];
-      Overview.selectedValue = Overview.data().data.length - 1;
-      Overview.mostRecentValue = Overview.data().data.length - 1;
+      Party.selected = Party.parties[0];
     });
   },
   controller() {
-    Overview.init();
+    Party.init();
 
     /* save all periods as string, save values and widths for selected party in arrays */
     this.list = function() {
-      var values = [],
-          heights = [],
+      var periods = [],
+          periodsSorted = [],
+          widths = [],
           year = "",
           period = "",
-          selected = "",
           months = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti",
                     "September", "Oktober", "November", "December"];
 
-      for (var i = 0; i < Overview.data().data.length; i++) {
-        if (Overview.data().data[i].key[1] == Overview.selected) {
-          if (Overview.data().data[i].values == "..") {
-            values.push("0.0");
-            heights.push(0.0);
-          } else {
-            values.push(Overview.data().data[i].values);
-            heights.push(Overview.data().data[i].values);
+      for (var i = Party.data().data.length - 1; i > 0; i--) {
+        if (Party.data().data[i].key[0] == Party.selected) {
+            periods.push(Party.data().data[i].key[1]);
+            widths.push(Party.data().data[i].values);
           }
-        }
       };
 
-      year = Overview.selected.substring(0,4);
-      period = Overview.selected.substring(5, 7);
+      for (var i = 0; i < periods.length; i++) {
+        year = periods[i].substring(0,4);
+        period = periods[i].substring(5, 7);
 
-      if (period >= 10) {
-        period = months[period - 1];
-      } else {
-        period = Overview.selected.substring(6, 7);
-        period = months[period - 1];
+        if (period >= 10) {
+          period = months[period - 1];
+        } else {
+          period = periods[i].substring(6, 7);
+          period = months[period - 1];
+        };
+
+        period = period + " " + year;
+        periodsSorted.push(period);
       };
-
-      selected = period + " " + year;
-
-      return [values, heights, selected];
+      console.log(periodsSorted);
+      console.log(widths);
+      return [periodsSorted, widths];
     };
 
     /* select previous party */
@@ -320,10 +316,15 @@ var Party = {
     return <div class="party" config={this.animate}>
       <div class="container graph-menu">
       <h1 class="text-medium text-gray previous" onclick={ctrl.previous}>Framåt</h1>
-      <h1 class="text-medium text-gray party-name">{ctrl.list()[2]}</h1>
+      <h1 class="text-medium text-gray party-name">{Party.selected}</h1>
       <h1 class="text-medium text-gray next" onclick={ctrl.next}>Bakåt</h1>
       </div>
       <div class="container party-graph">
+        <div class="party-entry">
+          <p class="party-period">{ctrl.list()[0][0]}</p>
+          <div class="v party-bar"></div>
+          <p class="party-value">{ctrl.list()[1][0]}</p>
+        </div>
       </div>
     </div>
   }

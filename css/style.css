@@ -136,7 +136,7 @@
   display: inline-block;
 }
 
-/* graph, political parties & logos */
+/* overview graph, political parties & logos */
 .graph {
   display: flex;
   flex: 1 1 auto;
@@ -209,3 +209,25 @@
 .no-margin-right {
   margin-right: 0 !important;
 }
+
+/* party graph */
+.party-entry {
+  display: flex;
+  align-items: center;
+}
+
+.party-period {
+  margin: 0;
+}
+
+.party-bar {
+  width: 40%;
+  height: 26px;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.party-value {
+  margin: 0;
+}
+
