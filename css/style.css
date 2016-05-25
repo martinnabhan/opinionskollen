@@ -213,26 +213,33 @@
   margin-right: 0 !important;
 }
 
-/* party graph */
+/* party menu & graph */
+.party-name {
+  display: inline-block;
+  margin-left: 15px;
+  margin-right: 15px;
+}
 .party-entry {
-  display: flex;
-  align-items: center;
   margin-bottom: 10px;
 }
 
 .party-period {
   margin: 0;
-  width: 110px;
+  width: 150px;
 }
 
 .party-bar {
+  display: inline-block;
   width: 40%;
   height: 26px;
-  margin-left: 10px;
   margin-right: 5px;
 }
 
 .party-value {
   margin: 0;
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  line-height: 26px;
+  top: -8px;
 }
-

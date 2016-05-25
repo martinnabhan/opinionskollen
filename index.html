@@ -301,15 +301,13 @@ var Party = {
   view(ctrl) {
     /* animate bars when view is finished loading */
     this.animate = function(element, init) {
-      /* resize graph */
+      var maxWidth = Math.max.apply(Math, ctrl.list()[1]),
+          barWidth = 0;
 
-      /* resize graph on first load */
-
-      /* resize on orientation change */
-
-      /* calculate bar widths */
-
-      /* animate bars */
+      $(".party-graph").children(".party-entry").children(".party-bar").each(function(i, div) {
+        barWidth = (ctrl.list()[1][i] / maxWidth) * 50 + "%";
+        $(div).css({"width": barWidth});
+      });
     };
 
     return <div class="party" config={this.animate}>
@@ -319,11 +317,11 @@ var Party = {
       <h1 class="text-medium text-gray next" onclick={ctrl.next}>Bakåt</h1>
       </div>
       <div class="container party-graph">
-        {ctrl.list()[0].map(function(entry, index) {
+        {ctrl.list()[0].map(function(entry, i) {
             return <div class="party-entry">
-              <p class="party-period">{entry}</p>
+              <p class="text-medium party-period">{entry}</p>
               <div class="v party-bar"></div>
-              <p class="party-value">{ctrl.list()[1][index]}%</p>
+              <p class="party-value">{ctrl.list()[1][i]}%</p>
             </div>
           })}
       </div>
