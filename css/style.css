@@ -214,10 +214,12 @@
 .party-entry {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .party-period {
   margin: 0;
+  width: 110px;
 }
 
 .party-bar {
