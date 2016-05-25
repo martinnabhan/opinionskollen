@@ -147,9 +147,12 @@
 .parties {
   position: relative;
   width: 10%;
+  height: 0;
   display: inline-block;
   margin-right: 2.85%;
   padding-bottom: 22px;
+  transition: height 0.4s ease-in-out;
+  -webkit-transition: height 0.4s ease-in-out;
 }
 .parties p {
   margin: 0;

@@ -122,7 +122,7 @@ var Overview = {
         setTimeout(function() {
           $(".graph").css("height", "initial");
           $(".graph").css("height", $(".graph").height() + "px");
-        }, 500);
+        }, 100);
       }
 
       /* resize graph once on first load */
@@ -159,29 +159,29 @@ var Overview = {
           sdHeight = ((ctrl.list()[1][7] / maxHeight) * 100) + "%";
 
       /* animate bar heights */
-      $("#v").animate({"height": vHeight});
-      $("#s").animate({"height": sHeight});
+      $("#v").css({"height": vHeight});
+      $("#s").css({"height": sHeight});
 
       if (mpHeight == "0%") {
-        $("#mp").animate({"height": "23px"});
+        $("#mp").css({"height": "23px"});
       } else {
-        $("#mp").animate({"height": mpHeight});
+        $("#mp").css({"height": mpHeight});
       };
 
-      $("#c").animate({"height": cHeight});
-      $("#l").animate({"height": lHeight});
-      $("#m").animate({"height": mHeight});
+      $("#c").css({"height": cHeight});
+      $("#l").css({"height": lHeight});
+      $("#m").css({"height": mHeight});
 
       if (kdHeight == "0%") {
-        $("#kd").animate({"height": "23px"});
+        $("#kd").css({"height": "23px"});
       } else {
-        $("#kd").animate({"height": kdHeight});
+        $("#kd").css({"height": kdHeight});
       };
 
       if (sdHeight == "0%") {
-        $("#sd").animate({"height": "23px"});
+        $("#sd").css({"height": "23px"});
       } else {
-        $("#sd").animate({"height": sdHeight});
+        $("#sd").css({"height": sdHeight});
       };
     };
 
