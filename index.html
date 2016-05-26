@@ -128,7 +128,7 @@ var Overview = {
       /* resize graph once on first load */
       if (!init) {
         graphSize();
-      }
+      };
 
       /* viewheight is broken on Chrome for android so only resize on orientation change */
       if (/Android/i.test(navigator.userAgent)) {
@@ -145,7 +145,7 @@ var Overview = {
         $(window).resize(function() {
           graphSize();
         });
-      }
+      };
 
       /* calculate bar heights */
       var maxHeight = Math.max.apply(Math, ctrl.list()[1]),
@@ -242,12 +242,13 @@ var Overview = {
 var Party = {
   data: m.prop(),
   selected: m.prop(),
-  parties: ["v", "s", "mp", "c", "l", "m", "kd", "sd"],
+  selectedParty: 0,
+  parties: ["v", "s", "mp", "c", "l", "m", "kd", "SD"],
 
   /* request json data and select default party */
   init() {
     m.request({method: "GET", url: "json/data.json"}).then(this.data).then(function() {
-      Party.selected = Party.parties[0];
+      Party.selected = Party.parties[Party.selectedParty];
     });
   },
   controller() {
@@ -265,9 +266,13 @@ var Party = {
 
       for (var i = Party.data().data.length - 1; i > 0; i--) {
         if (Party.data().data[i].key[0] == Party.selected) {
+          if (Party.data().data[i].values == "..") {
+            continue;
+          } else {
             periods.push(Party.data().data[i].key[1]);
             widths.push(Party.data().data[i].values);
-          }
+          };
+        };
       };
 
       for (var i = 0; i < periods.length; i++) {
@@ -290,12 +295,22 @@ var Party = {
 
     /* select previous party */
     this.previous = function() {
-
+      if (Party.selectedParty == 0) {
+        // user is on first party
+      } else {
+        Party.selectedParty--;
+        Party.selected = Party.parties[Party.selectedParty];
+      };
     };
 
     /* select next party */
     this.next = function() {
-
+      if (Party.selectedParty == 7) {
+        // user is on last party
+      } else {
+        Party.selectedParty++;
+        Party.selected = Party.parties[Party.selectedParty];
+      };
     };
   },
   view(ctrl) {
@@ -305,10 +320,12 @@ var Party = {
           barWidth = 0;
 
       $(".party-graph").children(".party-entry").children(".party-bar").each(function(i, div) {
-        barWidth = (ctrl.list()[1][i] / maxWidth) * 50 + "%";
+        barWidth = (ctrl.list()[1][i] / maxWidth) * 80 + "%";
         $(div).css({"width": barWidth});
       });
     };
+
+    var barClass = Party.selected + " party-bar";
 
     return <div class="party" config={this.animate}>
       <div class="container graph-menu">
@@ -320,7 +337,7 @@ var Party = {
         {ctrl.list()[0].map(function(entry, i) {
             return <div class="party-entry">
               <p class="text-medium party-period">{entry}</p>
-              <div class="v party-bar"></div>
+              <div class={barClass}></div>
               <p class="party-value">{ctrl.list()[1][i]}%</p>
             </div>
           })}
