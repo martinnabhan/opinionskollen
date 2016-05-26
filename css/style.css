@@ -161,6 +161,8 @@
 .v {
   background-color: #aa2f2f;
   height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .s {

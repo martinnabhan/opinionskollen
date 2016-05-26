@@ -114,38 +114,37 @@ var Overview = {
     this.animate = function(element, init) {
       /* resize graph */
       function graphSize() {
-        var navHeight = $(".navbar").height();
-        var windowHeight = $(window).height();
+        var navHeight = $(".navbar").height(),
+            graphMenuHeight = $(".graph-menu").height(),
+            logosHeight = $(".logos").outerHeight(true),
+            windowHeight = $(window).height();
 
-        $(".overview").css("height", windowHeight).css("height", "-=" + navHeight + "px");
-
-        setTimeout(function() {
-          $(".graph").css("height", "initial");
-          $(".graph").css("height", $(".graph").height() + "px");
-        }, 100);
+        $(".graph").css("height", windowHeight - navHeight - graphMenuHeight - logosHeight + "px");
       }
 
-      /* resize graph once on first load */
-      if (!init) {
-        graphSize();
-      };
-
-      /* viewheight is broken on Chrome for android so only resize on orientation change */
-      if (/Android/i.test(navigator.userAgent)) {
-        var androidWidth = $(window).width();
-
-        $(window).resize(function() {
-          if (androidWidth != $(window).width()) {
-            graphSize();
-            androidWidth = $(window).width();
-          }
-        });
-      } else {
-        /* if not android resize graph on window resize */
-        $(window).resize(function() {
+      $(".sd-img").load(function() {
+        /* resize graph once on first load */
+        if (!init) {
           graphSize();
-        });
-      };
+        };
+  
+        /* viewheight is broken on Chrome for android so only resize on orientation change */
+        if (/Android/i.test(navigator.userAgent)) {
+          var androidWidth = $(window).width();
+  
+          $(window).resize(function() {
+            if (androidWidth != $(window).width()) {
+              graphSize();
+              androidWidth = $(window).width();
+            }
+          });
+        } else {
+          /* if not android resize graph on window resize */
+          $(window).resize(function() {
+            graphSize();
+          });
+        };
+      });
 
       /* calculate bar heights */
       var maxHeight = Math.max.apply(Math, ctrl.list()[1]),
@@ -352,7 +351,6 @@ m.route(document.getElementById("main"), "/", {
 m.route.mode = "hash";
 
 </script>
-
 <footer class="background-dark">
   <div class="container">
     <div class="section text-center text-small">

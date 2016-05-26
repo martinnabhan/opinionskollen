@@ -31,7 +31,6 @@ $(document).ready(function() {
   /* hamburger menu trigger */
   $(".hamburger").click(toggleNav);
   $(".navlink").click(toggleNav);
-  $("body").hide().fadeIn(1000);
 });
 
 /* make esc exit hamburger menu */
