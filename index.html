@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Opinionskollen</title>
 <link rel="stylesheet" href="css/sierra.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/mithril.min.js"></script>
 <script src="js/MSXTransformer.js"></script>
@@ -34,7 +35,7 @@
 <div id="main"></div>
 
 <script type="text/msx;harmony=true">
-/* components */
+/* overview component */
 var Overview = {
   data: m.prop(),
   selected: m.prop(),
@@ -121,7 +122,6 @@ var Overview = {
 
         $(".graph").css("height", windowHeight - navHeight - graphMenuHeight - logosHeight + "px");
       }
-
       /* since the .logos div height changes dynamically we wait for the highest image to load */
       $(".sd-img").load(function() {
         /* resize graph once on first load */
@@ -147,11 +147,11 @@ var Overview = {
         };
       });
 
-      /* calculate bar heights */
+      /* calculate max bar height */
       var maxHeight = Math.max.apply(Math, ctrl.list()[1]),
           barOrder = [5, 4, 6, 0, 1, 2, 3, 7];
 
-      /* animate bar heights */
+      /* set bar heights */
       $(".graph").children().each(function(i, div) {
         if (ctrl.list()[1][barOrder[i]] == "0.0") {
           $(div).css({"height": "23px"});
@@ -163,9 +163,17 @@ var Overview = {
 
     return <div class="overview" config={this.animate}>
       <div class="container graph-menu">
-      <h1 class="text-medium text-gray previous" onclick={ctrl.previous}>Före</h1>
-      <h1 class="text-medium text-gray period">{ctrl.list()[2]}</h1>
-      <h1 class="text-medium text-gray next" onclick={ctrl.next}>Efter</h1>
+      <ul class="paginator-list paginator-compact">
+        <li class="paginator-list-item">
+          <a class="paginator-list-link" onclick={ctrl.previous}><i class="fa fa-angle-left"></i>Före</a>
+        </li>
+        <li class="paginator-list-item menu-middle">
+          <a class="paginator-list-link">{ctrl.list()[2]}</a>
+        </li>
+        <li class="paginator-list-item">
+          <a class="paginator-list-link" onclick={ctrl.next}>Efter<i class="fa fa-angle-right"></i></a>
+        </li>
+      </ul>
       </div>
       <div class="container graph">
         <div id="v" class="parties">
@@ -215,6 +223,7 @@ var Overview = {
   }
 }
 
+/* party component */
 var Party = {
   data: m.prop(),
   selected: m.prop(),
@@ -290,7 +299,7 @@ var Party = {
     };
   },
   view(ctrl) {
-    /* animate bars when view is finished loading */
+    /* set bar heights when view is finished loading */
     this.animate = function(element, init) {
       var maxWidth = Math.max.apply(Math, ctrl.list()[1]),
           barWidth = 0;
@@ -301,13 +310,22 @@ var Party = {
       });
     };
 
+    /* classname for each bar */
     var barClass = Party.selected + " party-bar";
 
     return <div class="party" config={this.animate}>
       <div class="container graph-menu">
-      <h1 class="text-medium text-gray previous" onclick={ctrl.previous}>Framåt</h1>
-      <h1 class="text-medium text-gray party-name">{Party.selected}</h1>
-      <h1 class="text-medium text-gray next" onclick={ctrl.next}>Bakåt</h1>
+      <ul class="paginator-list paginator-compact">
+        <li class="paginator-list-item">
+            <a class="paginator-list-link" onclick={ctrl.previous}><i class="fa fa-angle-left"></i>Bakåt</a>
+        </li>
+        <li class="paginator-list-item menu-middle">
+            <a class="paginator-list-link">{Party.selected}</a>
+        </li>
+        <li class="paginator-list-item">
+            <a class="paginator-list-link" onclick={ctrl.next}>Framåt<i class="fa fa-angle-right"></i></a>
+        </li>
+      </ul>
       </div>
       <div class="container party-graph">
         {ctrl.list()[0].map(function(entry, i) {
@@ -321,20 +339,21 @@ var Party = {
     </div>
   }
 }
+
 m.route(document.getElementById("main"), "/", {
     "/": Overview,
     "/partier": Party,
 });
 m.route.mode = "hash";
-
 </script>
+
 <footer class="background-dark">
   <div class="container">
     <div class="section text-center text-small">
       <h1 class="text-big text-with-subtitle">Opinionskollen</h1>
-      <p class="text-gray">v1.0.0</p>
+      <p class="text-gray">v1.0.1</p>
       <p>
-        <a href="#">GitHub</a>
+        <a href="http://github.com/MartinN13">GitHub</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="#">Second link</a>
         &nbsp;&nbsp;|&nbsp;&nbsp; 
@@ -343,5 +362,6 @@ m.route.mode = "hash";
     </div>
   </div>
 </footer>
+
 </body>
 </html>
