@@ -15,10 +15,10 @@
 <body>
 
 <div class="nav">
-  <li><a class="navlink" href="#/">Översikt</a></li>
+  <li><a class="navlink" href="#/">Alla partier</a></li>
   <li><a class="navlink" href="#/partier">Enskilda partier</a></li>
-  <li><a class="navlink" href="#/forandring">Översikt förändring</a></li>
-  <li><a class="navlink" href="#/partierforandring">Enskilda partier förändring</a></li>
+  <li><a class="navlink" href="#/forandring">Alla partiers förändring</a></li>
+  <li><a class="navlink" href="#/partierforandring">Enskilt partis förändring</a></li>
 </div>
 
 <div class="container navbar">
@@ -165,13 +165,13 @@ var Overview = {
       <div class="container graph-menu">
       <ul class="paginator-list paginator-compact">
         <li class="paginator-list-item">
-          <a class="paginator-list-link" onclick={ctrl.previous}><i class="fa fa-angle-left"></i>Före</a>
+          <a class="paginator-list-link" onclick={ctrl.previous}><i class="fa fa-angle-left"></i></a>
         </li>
         <li class="paginator-list-item menu-middle">
           <a class="paginator-list-link">{ctrl.list()[2]}</a>
         </li>
         <li class="paginator-list-item">
-          <a class="paginator-list-link" onclick={ctrl.next}>Efter<i class="fa fa-angle-right"></i></a>
+          <a class="paginator-list-link" onclick={ctrl.next}><i class="fa fa-angle-right"></i></a>
         </li>
       </ul>
       </div>
@@ -241,13 +241,16 @@ var Party = {
 
     /* save all periods as string, save values and widths for selected party in arrays */
     this.list = function() {
-      var periods = [],
+      var period = "",
+          periods = [],
           periodsSorted = [],
           widths = [],
           year = "",
-          period = "",
+          party = "",
           months = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti",
-                    "September", "Oktober", "November", "December"];
+                    "September", "Oktober", "November", "December"],
+          parties = ["Vänsterpartiet", "Socialdemokraterna", "Miljöpartiet", "Centerpartiet",
+                     "Liberalerna", "Moderaterna", "Kristdemokraterna", "Sverigedemokraterna"];
 
       for (var i = Party.data().data.length - 1; i > 0; i--) {
         if (Party.data().data[i].key[0] == Party.selected) {
@@ -275,7 +278,10 @@ var Party = {
         periodsSorted.push(period);
       };
 
-      return [periodsSorted, widths];
+      party = Party.parties.indexOf(Party.selected);
+      party = parties[party];
+
+      return [periodsSorted, widths, party];
     };
 
     /* select previous party */
@@ -317,13 +323,13 @@ var Party = {
       <div class="container graph-menu">
       <ul class="paginator-list paginator-compact">
         <li class="paginator-list-item">
-            <a class="paginator-list-link" onclick={ctrl.previous}><i class="fa fa-angle-left"></i>Bakåt</a>
+            <a class="paginator-list-link" onclick={ctrl.previous}><i class="fa fa-angle-left"></i></a>
         </li>
         <li class="paginator-list-item menu-middle">
-            <a class="paginator-list-link">{Party.selected}</a>
+            <a class="paginator-list-link">{ctrl.list()[2]}</a>
         </li>
         <li class="paginator-list-item">
-            <a class="paginator-list-link" onclick={ctrl.next}>Framåt<i class="fa fa-angle-right"></i></a>
+            <a class="paginator-list-link" onclick={ctrl.next}><i class="fa fa-angle-right"></i></a>
         </li>
       </ul>
       </div>

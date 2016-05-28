@@ -119,8 +119,14 @@
   width: 100%;
 }
 .menu-middle {
-  width: 140px;
+  width: 100%;
   text-align: center
+}
+.paginator-list .paginator-list-item:first-child i {
+  margin: 0;
+}
+.paginator-list .paginator-list-item:last-child i {
+  margin: 0;
 }
 
 /* overview graph, political parties & logos */
