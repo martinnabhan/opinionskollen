@@ -38,6 +38,7 @@
 /* overview component */
 var Overview = {
   data: m.prop(),
+  firstLoad: true,
   selected: m.prop(),
   selectedValue: 0,
   mostRecentValue: 0,
@@ -45,9 +46,12 @@ var Overview = {
   /* request json data and select latest data period */
   init() {
     m.request({method: "GET", url: "json/data.json"}).then(this.data).then(function() {
-      Overview.selected = Overview.data().data[Overview.data().data.length - 1].key[1];
-      Overview.selectedValue = Overview.data().data.length - 1;
-      Overview.mostRecentValue = Overview.data().data.length - 1;
+      if (Overview.firstLoad) {
+        Overview.firstLoad = false;
+        Overview.selected = Overview.data().data[Overview.data().data.length - 1].key[1];
+        Overview.selectedValue = Overview.data().data.length - 1;
+        Overview.mostRecentValue = Overview.data().data.length - 1;
+      }
     });
   },
   controller() {
