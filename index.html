@@ -56,7 +56,6 @@ var Overview = {
     /* save selected period as string, values and heights for selected period in arrays */
     this.list = function() {
       var values = [],
-          heights = [],
           year = "",
           period = "",
           selected = "",
@@ -66,11 +65,9 @@ var Overview = {
       for (var i = 0; i < Overview.data().data.length; i++) {
         if (Overview.data().data[i].key[1] == Overview.selected) {
           if (Overview.data().data[i].values == "..") {
-            values.push("0.0");
-            heights.push(0.0);
+            values.push(0.0);
           } else {
             values.push(Overview.data().data[i].values);
-            heights.push(Overview.data().data[i].values);
           }
         }
       };
@@ -87,7 +84,7 @@ var Overview = {
 
       selected = period + " " + year;
 
-      return [values, heights, selected];
+      return [values, selected];
     };
 
     /* select previous period */
@@ -148,15 +145,15 @@ var Overview = {
       });
 
       /* calculate max bar height */
-      var maxHeight = Math.max.apply(Math, ctrl.list()[1]),
+      var maxHeight = Math.max.apply(Math, ctrl.list()[0]),
           barOrder = [5, 4, 6, 0, 1, 2, 3, 7];
 
       /* set bar heights */
       $(".graph").children().each(function(i, div) {
-        if (ctrl.list()[1][barOrder[i]] == "0.0") {
+        if (ctrl.list()[0][barOrder[i]] == 0.0) {
           $(div).css({"height": "23px"});
         } else {
-          $(div).css({"height": (ctrl.list()[1][barOrder[i]] / maxHeight) * 100 + "%"});
+          $(div).css({"height": (ctrl.list()[0][barOrder[i]] / maxHeight) * 100 + "%"});
         };
       });
     };
@@ -168,7 +165,7 @@ var Overview = {
           <a class="paginator-list-link" onclick={ctrl.previous}><i class="fa fa-angle-left"></i></a>
         </li>
         <li class="paginator-list-item menu-middle">
-          <a class="paginator-list-link">{ctrl.list()[2]}</a>
+          <a class="paginator-list-link">{ctrl.list()[1]}</a>
         </li>
         <li class="paginator-list-item">
           <a class="paginator-list-link" onclick={ctrl.next}><i class="fa fa-angle-right"></i></a>
