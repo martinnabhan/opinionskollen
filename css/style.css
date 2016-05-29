@@ -216,6 +216,31 @@
   margin-right: 0 !important;
 }
 
+.v-img {
+  opacity: 0.4;
+}
+.s-img {
+  opacity: 0.4;
+}
+.mp-img {
+  opacity: 0.4;
+}
+.c-img {
+  opacity: 0.4;
+}
+.l-img {
+  opacity: 0.4;
+}
+.m-img {
+  opacity: 0.4;
+}
+.kd-img {
+  opacity: 0.4;
+}
+.sd-img {
+  opacity: 0.4;
+}
+
 /* party menu & graph */
 .party-name {
   display: inline-block;

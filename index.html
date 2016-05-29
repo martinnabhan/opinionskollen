@@ -123,7 +123,7 @@ var Overview = {
         $(".graph").css("height", windowHeight - navHeight - graphMenuHeight - logosHeight + "px");
       }
       /* since the .logos div height changes dynamically we wait for the highest image to load */
-      $(".sd-img").load(function() {
+      $("#sd-img").load(function() {
         /* resize graph once on first load */
         if (!init) {
           graphSize();
@@ -210,14 +210,14 @@ var Overview = {
         </div>
       </div>
       <div class="container background-dark logos">
-        <img src="img/logo-v.png" alt="Vänsterpartiet" class="v-img" />
-        <img src="img/logo-s.svg" alt="Socialdemokraterna" class="s-img" />
-        <img src="img/logo-mp.svg" alt="Miljöpartiet" class="mp-img" />
-        <img src="img/logo-c.svg" alt="Centerpartiet" class="c-img" />
-        <img src="img/logo-l.png" alt="Liberalerna" class="l-img" />
-        <img src="img/logo-m.png" alt="Moderaterna" class="m-img" />
-        <img src="img/logo-kd.svg" alt="Kristdemokraterna" class="kd-img" />
-        <img src="img/logo-sd.png" alt="Sverigedemokraterna" class="sd-img no-margin-right" />
+        <img src="img/logo-v.png" alt="Vänsterpartiet" />
+        <img src="img/logo-s.svg" alt="Socialdemokraterna" />
+        <img src="img/logo-mp.svg" alt="Miljöpartiet"  />
+        <img src="img/logo-c.svg" alt="Centerpartiet" />
+        <img src="img/logo-l.png" alt="Liberalerna" />
+        <img src="img/logo-m.png" alt="Moderaterna" />
+        <img src="img/logo-kd.svg" alt="Kristdemokraterna" />
+        <img src="img/logo-sd.png" alt="Sverigedemokraterna" id="sd-img" class="no-margin-right" />
       </div>
     </div>
   }
@@ -289,6 +289,7 @@ var Party = {
       if (Party.selectedParty == 0) {
         // user is on first party
       } else {
+        $("." + Party.selected + "-img").css({"opacity": 0.4});
         Party.selectedParty--;
         Party.selected = Party.parties[Party.selectedParty];
       };
@@ -299,6 +300,7 @@ var Party = {
       if (Party.selectedParty == 7) {
         // user is on last party
       } else {
+        $("." + Party.selected + "-img").css({"opacity": 0.4});
         Party.selectedParty++;
         Party.selected = Party.parties[Party.selectedParty];
       };
@@ -314,6 +316,8 @@ var Party = {
         barWidth = (ctrl.list()[1][i] / maxWidth) * 80 + "%";
         $(div).css({"width": barWidth});
       });
+
+      $("." + Party.selected.toLowerCase() + "-img").css({"opacity": 1});
     };
 
     /* classname for each bar */
@@ -332,6 +336,16 @@ var Party = {
             <a class="paginator-list-link" onclick={ctrl.next}><i class="fa fa-angle-right"></i></a>
         </li>
       </ul>
+      </div>
+      <div class="container logos">
+        <img src="img/logo-v.png" alt="Vänsterpartiet" class="v-img" />
+        <img src="img/logo-s.svg" alt="Socialdemokraterna" class="s-img" />
+        <img src="img/logo-mp.svg" alt="Miljöpartiet" class="mp-img" />
+        <img src="img/logo-c.svg" alt="Centerpartiet" class="c-img" />
+        <img src="img/logo-l.png" alt="Liberalerna" class="l-img" />
+        <img src="img/logo-m.png" alt="Moderaterna" class="m-img" />
+        <img src="img/logo-kd.svg" alt="Kristdemokraterna" class="kd-img" />
+        <img src="img/logo-sd.png" alt="Sverigedemokraterna" class="sd-img no-margin-right" />
       </div>
       <div class="container party-graph">
         {ctrl.list()[0].map(function(entry, i) {
