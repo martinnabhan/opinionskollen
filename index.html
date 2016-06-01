@@ -76,7 +76,7 @@ var Overview = {
         }
       };
 
-      year = Overview.selected.substring(0,4);
+      year = Overview.selected.substring(0, 4);
       period = Overview.selected.substring(5, 7);
 
       if (period >= 10) {
@@ -306,6 +306,22 @@ var Party = {
         Party.selected = Party.parties[Party.selectedParty];
       };
     };
+
+    /* select party with click on logo */
+    this.click = function() {
+      $("." + Party.selected + "-img").css({"opacity": 0.4});
+      
+      var logo = this.className.substring(0, 2);
+
+      if (logo == "sd") {
+        logo = logo.toUpperCase();
+      } else if (logo.charAt(1) == "-") {
+        logo = this.className.substring(0, 1);
+      }
+
+      Party.selectedParty = Party.parties.indexOf(logo);
+      Party.selected = Party.parties[Party.selectedParty];
+    };
   },
   view(ctrl) {
     /* set bar heights when view is finished loading */
@@ -339,14 +355,14 @@ var Party = {
       </ul>
       </div>
       <div class="container logos">
-        <img src="img/logo-v.png" alt="Vänsterpartiet" class="v-img" />
-        <img src="img/logo-s.svg" alt="Socialdemokraterna" class="s-img" />
-        <img src="img/logo-mp.svg" alt="Miljöpartiet" class="mp-img" />
-        <img src="img/logo-c.svg" alt="Centerpartiet" class="c-img" />
-        <img src="img/logo-l.png" alt="Liberalerna" class="l-img" />
-        <img src="img/logo-m.png" alt="Moderaterna" class="m-img" />
-        <img src="img/logo-kd.svg" alt="Kristdemokraterna" class="kd-img" />
-        <img src="img/logo-sd.png" alt="Sverigedemokraterna" class="sd-img no-margin-right" />
+        <img src="img/logo-v.png" alt="Vänsterpartiet" class="v-img" onclick={ctrl.click} />
+        <img src="img/logo-s.svg" alt="Socialdemokraterna" class="s-img" onclick={ctrl.click} />
+        <img src="img/logo-mp.svg" alt="Miljöpartiet" class="mp-img" onclick={ctrl.click} />
+        <img src="img/logo-c.svg" alt="Centerpartiet" class="c-img" onclick={ctrl.click} />
+        <img src="img/logo-l.png" alt="Liberalerna" class="l-img" onclick={ctrl.click} />
+        <img src="img/logo-m.png" alt="Moderaterna" class="m-img" onclick={ctrl.click} />
+        <img src="img/logo-kd.svg" alt="Kristdemokraterna" class="kd-img" onclick={ctrl.click} />
+        <img src="img/logo-sd.png" alt="Sverigedemokraterna" class="sd-img no-margin-right" onclick={ctrl.click} />
       </div>
       <div class="container party-graph">
         {ctrl.list()[0].map(function(entry, i) {
