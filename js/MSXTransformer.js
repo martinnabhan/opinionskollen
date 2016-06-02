@@ -1,3 +1,5 @@
+/* jshint ignore:start */
+// jscs:disable
 /**
  * MSXTransformer v0.4.0
  */
@@ -15948,3 +15950,5 @@ module.exports = inlineSourceMap;
 
 },{"buffer":3}]},{},[1])(1)
 });
+/* jshint ignore:end */
+

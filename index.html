@@ -450,7 +450,6 @@ var Compare = {
         periodsSorted.push(period);
       };
 
-      console.log(party);
       return [periodsSorted, widths, party];
     };
 
@@ -505,7 +504,7 @@ var Compare = {
           barWidth = 0;
 
       $(".party-graph").children(".party-entry").children(".party-bar").each(function(i, div) {
-        barWidth = (ctrl.list()[1][i] / maxWidth) * 80 + "%";
+        barWidth = ($(this).next().html().slice(0, -1) / maxWidth) * 80 + "%";
         $(div).css({"width": barWidth});
       });
     };
