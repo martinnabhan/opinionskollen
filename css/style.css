@@ -4,6 +4,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* header link */
+.header {
+  color: inherit;
+}
+
 /* hamburger button */
 .hamburger {
   padding: 0;

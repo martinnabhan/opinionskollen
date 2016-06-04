@@ -15,14 +15,14 @@
 <body>
 
 <div class="nav">
-  <li><a class="navlink" href="#/">Alla partier</a></li>
-  <li><a class="navlink" href="#/partier">Enskilda partier</a></li>
+  <li><a class="navlink" href="#/">Alla riksdagspartier</a></li>
+  <li><a class="navlink" href="#/partier">Enskilda riksdagspartier</a></li>
   <li><a class="navlink" href="#/jamfor">Jämför perioder</a></li>
 </div>
 
 <div class="container navbar">
   <div class="aligner-space-between">
-    <h1 class="text-big">Opinionskollen</h1>
+    <a class="header" href="#/"><h1 class="text-big">Opinionskollen</h1></a>
     <button id="hamburger" class="hamburger hamburger--elastic" type="button">
       <span class="hamburger-box">
         <span class="hamburger-inner"></span>
@@ -457,7 +457,7 @@ var Compare = {
     this.previous = function() {
       /* Check if user wants to change period one or period two */
       if (this.className.substring(0, 9) == "periodOne") {
-        if (Compare.selectedOneValue == Compare.data().data.length - 2) {
+        if (Compare.selectedOneValue == Compare.data().data.length / 8) {
           /* user is already on latest period */
         } else {
           Compare.selectedOneValue++;
@@ -465,7 +465,7 @@ var Compare = {
                                       Compare.selectedOneValue].key[1];
         };
       } else if (this.className.substring(0, 9) == "periodTwo") {
-        if (Compare.selectedTwoValue == Compare.data().data.length - 2)  {
+        if (Compare.selectedTwoValue == Compare.data().data.length / 8)  {
           /* user is already on latest period */
         } else {
           Compare.selectedTwoValue++;
@@ -505,7 +505,12 @@ var Compare = {
 
       $(".party-graph").children(".party-entry").children(".party-bar").each(function(i, div) {
         barWidth = ($(this).next().html().slice(0, -1) / maxWidth) * 80 + "%";
-        $(div).css({"width": barWidth});
+
+        if (barWidth == "0%") {
+          $(div).css({"width": "1%"});
+        } else {
+          $(div).css({"width": barWidth});
+        };
       });
     };
 
