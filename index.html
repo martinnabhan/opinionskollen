@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Opinionskollen</title>
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
 <link rel="stylesheet" href="css/sierra.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/style.css">
@@ -22,7 +25,7 @@
 
 <div class="container navbar">
   <div class="aligner-space-between">
-    <a class="header" href="#/"><h1 class="text-big">Opinionskollen</h1></a>
+    <h1 class="text-big">Opinionskollen</h1>
     <button id="hamburger" class="hamburger hamburger--elastic" type="button">
       <span class="hamburger-box">
         <span class="hamburger-inner"></span>
@@ -212,7 +215,7 @@ var Overview = {
       <div class="container background-dark logos">
         <img src="img/logo-v.png" alt="Vänsterpartiet" />
         <img src="img/logo-s.svg" alt="Socialdemokraterna" />
-        <img src="img/logo-mp.svg" alt="Miljöpartiet"  />
+        <img src="img/logo-mp.svg" alt="Miljöpartiet" />
         <img src="img/logo-c.svg" alt="Centerpartiet" />
         <img src="img/logo-l.png" alt="Liberalerna" />
         <img src="img/logo-m.png" alt="Moderaterna" />
@@ -540,67 +543,106 @@ var Compare = {
       </ul>
       </div>
       <div class="container party-graph">
+        <div class="party-title">
+          <img src="img/logo-v.png" alt="Vänsterpartiet" class="compare-logo"/>
+          <h1 class="text-medium">Vänsterpartiet</h1>
+        </div>
         <div class="party-entry">
-          <p class="text-medium party-period">{ctrl.list()[0][0]}</p>
           <div class="v party-bar"></div>
           <p class="party-value">{ctrl.list()[1][2]}%</p>
-          <p class="text-medium party-period">{ctrl.list()[0][1]}</p>
+        </div>
+        <div class="party-entry">
           <div class="v party-bar"></div>
           <p class="party-value">{ctrl.list()[1][10]}%</p>
         </div>
+
+        <div class="party-title">
+          <img src="img/logo-s.svg" alt="Socialdemokraterna" class="compare-logo"/>
+          <h1 class="text-medium">Socialdemokraterna</h1>
+        </div>
         <div class="party-entry">
-          <p class="text-medium party-period">{ctrl.list()[0][0]}</p>
           <div class="s party-bar"></div>
           <p class="party-value">{ctrl.list()[1][3]}%</p>
-          <p class="text-medium party-period">{ctrl.list()[0][1]}</p>
+        </div>
+        <div class="party-entry">
           <div class="s party-bar"></div>
           <p class="party-value">{ctrl.list()[1][11]}%</p>
         </div>
+
+        <div class="party-title">
+          <img src="img/logo-mp.svg" alt="Miljöpartiet" class="compare-logo"/>
+          <h1 class="text-medium">Miljöpartiet</h1>
+        </div>
         <div class="party-entry">
-          <p class="text-medium party-period">{ctrl.list()[0][0]}</p>
           <div class="mp party-bar"></div>
           <p class="party-value">{ctrl.list()[1][1]}%</p>
-          <p class="text-medium party-period">{ctrl.list()[0][1]}</p>
+        </div>
+        <div class="party-entry">
           <div class="mp party-bar"></div>
           <p class="party-value">{ctrl.list()[1][9]}%</p>
         </div>
+
+        <div class="party-title">
+          <img src="img/logo-c.svg" alt="Centerpartiet" class="compare-logo"/>
+          <h1 class="text-medium">Centerpartiet</h1>
+        </div>
         <div class="party-entry">
-          <p class="text-medium party-period">{ctrl.list()[0][0]}</p>
           <div class="c party-bar"></div>
           <p class="party-value">{ctrl.list()[1][7]}%</p>
-          <p class="text-medium party-period">{ctrl.list()[0][1]}</p>
+        </div>
+        <div class="party-entry">
           <div class="c party-bar"></div>
           <p class="party-value">{ctrl.list()[1][15]}%</p>
         </div>
+
+        <div class="party-title">
+          <img src="img/logo-l.png" alt="Liberalerna" class="compare-logo"/>
+          <h1 class="text-medium">Liberalerna</h1>
+        </div>
         <div class="party-entry">
-          <p class="text-medium party-period">{ctrl.list()[0][0]}</p>
           <div class="l party-bar"></div>
           <p class="party-value">{ctrl.list()[1][6]}%</p>
-          <p class="text-medium party-period">{ctrl.list()[0][1]}</p>
+        </div>
+        <div class="party-entry">
           <div class="l party-bar"></div>
           <p class="party-value">{ctrl.list()[1][14]}%</p>
         </div>
+
+        <div class="party-title">
+          <img src="img/logo-m.png" alt="Moderaterna" class="compare-logo compare-m-img"/>
+          <h1 class="text-medium">Moderaterna</h1>
+        </div>
         <div class="party-entry">
-          <p class="text-medium party-period">{ctrl.list()[0][0]}</p>
           <div class="m party-bar"></div>
           <p class="party-value">{ctrl.list()[1][5]}%</p>
-          <p class="text-medium party-period">{ctrl.list()[0][1]}</p>
+        </div>
+        <div class="party-entry">
           <div class="m party-bar"></div>
           <p class="party-value">{ctrl.list()[1][13]}%</p>
         </div>
+
+        <div class="party-title">
+          <img src="img/logo-kd.svg" alt="Kristdemokraterna" class="compare-logo"/>
+          <h1 class="text-medium">Kristdemokraterna</h1>
+        </div>
         <div class="party-entry">
-          <p class="text-medium party-period">{ctrl.list()[0][0]}</p>
           <div class="kd party-bar"></div>
           <p class="party-value">{ctrl.list()[1][4]}%</p>
-          <p class="text-medium party-period">{ctrl.list()[0][1]}</p>
+        </div>
+        <div class="party-entry">
           <div class="kd party-bar"></div>
           <p class="party-value">{ctrl.list()[1][12]}%</p>
         </div>
+
+        <div class="party-title">
+          <img src="img/logo-sd.png" alt="Sverigedemokraterna" class="compare-logo"/>
+          <h1 class="text-medium">Sverigedemokraterna</h1>
+        </div>
         <div class="party-entry">
-          <p class="text-medium party-period">{ctrl.list()[0][0]}</p>
           <div class="sd party-bar"></div>
           <p class="party-value">{ctrl.list()[1][0]}%</p>
-          <p class="text-medium party-period">{ctrl.list()[0][1]}</p>
+        </div>
+        <div class="party-entry">
           <div class="sd party-bar"></div>
           <p class="party-value">{ctrl.list()[1][8]}%</p>
         </div>
@@ -621,13 +663,14 @@ m.route.mode = "hash";
   <div class="container">
     <div class="section text-center text-small">
       <h1 class="text-big text-with-subtitle">Opinionskollen</h1>
-      <p class="text-gray">v1.0.1</p>
+      <p class="text-gray">v1.0.2</p>
       <p>
-        <a href="http://github.com/MartinN13">GitHub</a>
+        <a href="http://github.com/MartinN13/">GitHub</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="#">Second link</a>
+        <a href="http://www.scb.se/sv_/Hitta-statistik/Statistik-efter-amne/Demokrati/Partisympatier/
+                 Partisympatiundersokningen-PSU/">Partisympatiundersökningen</a>
         &nbsp;&nbsp;|&nbsp;&nbsp; 
-        <a href="#">Third link</a>
+        <a href="http://www.scb.se/">SCB</a>
       </p>
     </div>
   </div>
