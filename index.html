@@ -336,7 +336,7 @@ var Party = {
         $(div).css({"width": barWidth});
       });
 
-      $("." + Party.selected.toLowerCase() + "-img").css({"opacity": 1});
+      $("." + Party.selected + "-img").css({"opacity": 1});
     };
 
     /* classname for each bar */
@@ -364,7 +364,7 @@ var Party = {
         <img src="img/logo-l.png" alt="Liberalerna" class="l-img" onclick={ctrl.click} />
         <img src="img/logo-m.png" alt="Moderaterna" class="m-img" onclick={ctrl.click} />
         <img src="img/logo-kd.svg" alt="Kristdemokraterna" class="kd-img" onclick={ctrl.click} />
-        <img src="img/logo-sd.png" alt="Sverigedemokraterna" class="sd-img no-margin-right" onclick={ctrl.click} />
+        <img src="img/logo-sd.png" alt="Sverigedemokraterna" class="SD-img no-margin-right" onclick={ctrl.click} />
       </div>
       <div class="container party-graph">
         {ctrl.list()[0].map(function(entry, i) {
