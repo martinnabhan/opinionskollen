@@ -1,0 +1,3 @@
+# Ignore firebase configuration
+firebase.json
+.firebaserc
