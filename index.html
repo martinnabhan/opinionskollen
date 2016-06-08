@@ -95,7 +95,7 @@ var Overview = {
 
     /* select previous period */
     this.previous = function() {
-      if (Overview.selectedValue == 0) {
+      if (Overview.selectedValue == Overview.data().data.length - Overview.data().data.length / 8) {
         /* user is on first period */
       } else {
         Overview.selectedValue--;
@@ -667,8 +667,7 @@ m.route.mode = "hash";
       <p>
         <a href="http://github.com/MartinN13/">GitHub</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="http://www.scb.se/sv_/Hitta-statistik/Statistik-efter-amne/Demokrati/Partisympatier/
-                 Partisympatiundersokningen-PSU/">Partisympatiundersökningen</a>
+        <a href="http://www.scb.se/sv_/Hitta-statistik/Statistik-efter-amne/Demokrati/Partisympatier/Partisympatiundersokningen-PSU/">Partisympatiundersökningen</a>
         &nbsp;&nbsp;|&nbsp;&nbsp; 
         <a href="http://www.scb.se/">SCB</a>
       </p>
