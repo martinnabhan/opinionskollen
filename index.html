@@ -233,9 +233,9 @@ var Party = {
   selectedParty: 0,
   parties: ["v", "s", "mp", "c", "l", "m", "kd", "SD"],
 
-  /* request json data and select default party */
+  /* select default party */
   init() {
-      Party.selected = Party.parties[Party.selectedParty];
+    Party.selected = Party.parties[Party.selectedParty];
   },
   controller() {
     Party.init();
@@ -386,7 +386,7 @@ var Compare = {
   selectedTwoValue: 2,
   parties: ["v", "s", "mp", "c", "l", "m", "kd", "SD"],
 
-  /* request json data and select default party */
+  /* select default parties */
   init() {
     Compare.selectedOnePeriod = Overview.data().data[Overview.data().data.length - Compare.selectedOneValue].key[1];
     Compare.selectedTwoPeriod = Overview.data().data[Overview.data().data.length - Compare.selectedTwoValue].key[1];
