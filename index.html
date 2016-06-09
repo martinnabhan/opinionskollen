@@ -235,9 +235,7 @@ var Party = {
 
   /* request json data and select default party */
   init() {
-    m.request({method: "GET", url: "json/data.json"}).then(this.data).then(function() {
       Party.selected = Party.parties[Party.selectedParty];
-    });
   },
   controller() {
     Party.init();
@@ -255,13 +253,13 @@ var Party = {
           parties = ["Vänsterpartiet", "Socialdemokraterna", "Miljöpartiet", "Centerpartiet",
                      "Liberalerna", "Moderaterna", "Kristdemokraterna", "Sverigedemokraterna"];
 
-      for (var i = Party.data().data.length - 1; i > 0; i--) {
-        if (Party.data().data[i].key[0] == Party.selected) {
-          if (Party.data().data[i].values == "..") {
+      for (var i = Overview.data().data.length - 1; i > 0; i--) {
+        if (Overview.data().data[i].key[0] == Party.selected) {
+          if (Overview.data().data[i].values == "..") {
             continue;
           } else {
-            periods.push(Party.data().data[i].key[1]);
-            widths.push(Party.data().data[i].values);
+            periods.push(Overview.data().data[i].key[1]);
+            widths.push(Overview.data().data[i].values);
           };
         };
       };
@@ -390,10 +388,8 @@ var Compare = {
 
   /* request json data and select default party */
   init() {
-    m.request({method: "GET", url: "json/data.json"}).then(this.data).then(function() {
-      Compare.selectedOnePeriod = Compare.data().data[Compare.data().data.length - Compare.selectedOneValue].key[1];
-      Compare.selectedTwoPeriod = Compare.data().data[Compare.data().data.length - Compare.selectedTwoValue].key[1];
-    });
+    Compare.selectedOnePeriod = Overview.data().data[Overview.data().data.length - Compare.selectedOneValue].key[1];
+    Compare.selectedTwoPeriod = Overview.data().data[Overview.data().data.length - Compare.selectedTwoValue].key[1];
   },
   controller() {
     Compare.init();
@@ -411,31 +407,31 @@ var Compare = {
           parties = ["Vänsterpartiet", "Socialdemokraterna", "Miljöpartiet", "Centerpartiet",
                      "Liberalerna", "Moderaterna", "Kristdemokraterna", "Sverigedemokraterna"];
 
-      for (var i = Compare.data().data.length - 1; i > 0; i--) {
-        if (Compare.data().data[i].key[1] == Compare.selectedOnePeriod) {
-          if (Compare.data().data[i].values == "..") {
+      for (var i = Overview.data().data.length - 1; i > 0; i--) {
+        if (Overview.data().data[i].key[1] == Compare.selectedOnePeriod) {
+          if (Overview.data().data[i].values == "..") {
             widths.push(0.0);
           } else {
-            widths.push(Compare.data().data[i].values);
+            widths.push(Overview.data().data[i].values);
           };
-          party.push(Compare.data().data[i].key[0]);
+          party.push(Overview.data().data[i].key[0]);
         };
       };
 
-      for (var i = Compare.data().data.length - 1; i > 0; i--) {
-        if (Compare.data().data[i].key[1] == Compare.selectedTwoPeriod) {
-          if (Compare.data().data[i].values == "..") {
+      for (var i = Overview.data().data.length - 1; i > 0; i--) {
+        if (Overview.data().data[i].key[1] == Compare.selectedTwoPeriod) {
+          if (Overview.data().data[i].values == "..") {
             widths.push(0.0);
           } else {
-            widths.push(Compare.data().data[i].values);
+            widths.push(Overview.data().data[i].values);
           };
-          party.push(Compare.data().data[i].key[0]);
+          party.push(Overview.data().data[i].key[0]);
         };
       };
 
-      periods.push(Compare.selectedOnePeriod = Compare.data().data[Compare.data().data.length -
+      periods.push(Compare.selectedOnePeriod = Overview.data().data[Overview.data().data.length -
                    Compare.selectedOneValue].key[1]);
-      periods.push(Compare.selectedTwoPeriod = Compare.data().data[Compare.data().data.length - 
+      periods.push(Compare.selectedTwoPeriod = Overview.data().data[Overview.data().data.length - 
                    Compare.selectedTwoValue].key[1]);
 
       for (var i = 0; i < periods.length; i++) {
@@ -460,19 +456,19 @@ var Compare = {
     this.previous = function() {
       /* Check if user wants to change period one or period two */
       if (this.className.substring(0, 9) == "periodOne") {
-        if (Compare.selectedOneValue == Compare.data().data.length / 8) {
+        if (Compare.selectedOneValue == Overview.data().data.length / 8) {
           /* user is already on latest period */
         } else {
           Compare.selectedOneValue++;
-          Compare.selectedOnePeriod = Compare.data().data[Compare.data().data.length - 
+          Compare.selectedOnePeriod = Overview.data().data[Overview.data().data.length - 
                                       Compare.selectedOneValue].key[1];
         };
       } else if (this.className.substring(0, 9) == "periodTwo") {
-        if (Compare.selectedTwoValue == Compare.data().data.length / 8)  {
+        if (Compare.selectedTwoValue == Overview.data().data.length / 8)  {
           /* user is already on latest period */
         } else {
           Compare.selectedTwoValue++;
-          Compare.selectedTwoPeriod = Compare.data().data[Compare.data().data.length - 
+          Compare.selectedTwoPeriod = Overview.data().data[Overview.data().data.length - 
                                       Compare.selectedTwoValue].key[1];
         };
       };
@@ -486,7 +482,7 @@ var Compare = {
           /* user is already on first period */
         } else {
           Compare.selectedOneValue--;
-          Compare.selectedOnePeriod = Compare.data().data[Compare.data().data.length - 
+          Compare.selectedOnePeriod = Overview.data().data[Overview.data().data.length - 
                                       Compare.selectedOneValue].key[1];
         };
       } else if (this.className.substring(0, 9) == "periodTwo") {
@@ -494,7 +490,7 @@ var Compare = {
           /* user is already on first period */
         } else {
           Compare.selectedTwoValue--;
-          Compare.selectedTwoPeriod = Compare.data().data[Compare.data().data.length - 
+          Compare.selectedTwoPeriod = Overview.data().data[Overview.data().data.length - 
                                       Compare.selectedTwoValue].key[1];
         };
       };
