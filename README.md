@@ -1,8 +1,8 @@
 # Opinionskollen
 
-Opinionskollen is a webapp presentening the results from the bi-annual political polls made by SCB.
+Opinionskollen is a web app which presents the results from the bi-annual political polls made by SCB.
 It is written using the JavaScript framework Mithril.js and is populated with data by running the
-`update-sources.bash` script, which pulls the latest data from SCB's public API.
+`update-sources.bash` script, which pulls the latest data from SCB's public API and saves it to `/json/data.json`.
 
 Opinionskollen has three pages:
 
